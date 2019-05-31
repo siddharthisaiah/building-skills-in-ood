@@ -1,3 +1,6 @@
+from random import Random
+from os import urandom
+
 class Outcome:
 
     def __init__(self, name, odds):
@@ -46,15 +49,24 @@ class Wheel:
     It can select a Bin at random, simulating a spin of the Roulette wheel.
     """
     def __init__(self):
-        self.bins = tuple(Bin() for _ in range(38))
+        self.bins = [Bin() for _ in range(38)]
         # TODO: create a random number generator
+        self.rng = Random()
 
 
     def addOutcome(self, number, outcome):
         """
         Adds the given Outcome to the Bin with the given number.
         """
-        pass
+        self.bins[number] |= Bin([outcome])
+
+
+    def next(self):
+        """
+        Generate a random number between 0-37 and return the coressponding bin
+        """
+        self.rng.seed(urandom(20))
+        return self.rng.choice(self.bins)
 
 
     def get(self, bin):
@@ -65,4 +77,4 @@ class Wheel:
         Returns:	The requested Bin.
         Return type:	Bin
         """
-        pass
+        return self.bins[bin]

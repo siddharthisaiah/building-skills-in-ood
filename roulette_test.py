@@ -53,6 +53,8 @@ class WheelBuildTest(unittest.TestCase):
         self.bin_four = Bin([self.corner_one_two_four_five, self.line_one_to_six])
         self.wheel = Wheel()
 
+    def test_wheel_returns_empty_bin(self):
+        self.assertEqual(self.wheel.get(15), Bin() )
 
     def test_wheel_has_38_bins(self):
         self.assertEqual(len(self.wheel.bins), 38)
@@ -65,14 +67,22 @@ class WheelBuildTest(unittest.TestCase):
         
     def test_outcomes_can_be_added_to_non_empty_bins_in_wheel(self):
         self.wheel.addOutcome(1, self.street_one_two_three)
+        self.wheel.addOutcome(1, self.one)
         self.assertEqual(self.wheel.get(1), Bin({Outcome("1", 35), Outcome("1-2-3", 11)}))
 
     
 
 
 class WheelRandomTest(unittest.TestCase):
-    pass
 
+    def setUp(self):
+        self.wheel = Wheel()
+
+    def test_wheel_selects_random_bins(self):
+        # seed is set to os.urandom(20)
+        self.assertEqual(self.wheel.next(), self.wheel.get(3))
+        self.assertEqual(self.wheel.next(), self.wheel.get(13))
+        
 
 if __name__ == '__main__':
     unittest.main()

@@ -39,3 +39,30 @@ class Bin(frozenset):
     These are collected into a single Bin .
     """
         
+
+class Wheel:
+    """
+    Wheel contains the 38 individual bins on a Roulette wheel, plus a random number generator. 
+    It can select a Bin at random, simulating a spin of the Roulette wheel.
+    """
+    def __init__(self):
+        self.bins = tuple(Bin() for _ in range(38))
+        # TODO: create a random number generator
+
+
+    def addOutcome(self, number, outcome):
+        """
+        Adds the given Outcome to the Bin with the given number.
+        """
+        pass
+
+
+    def get(self, bin):
+        """
+        Returns the given Bin from the internal collection.
+
+        Parameters:	bin (int) – bin number, in the range zero to 37 inclusive.
+        Returns:	The requested Bin.
+        Return type:	Bin
+        """
+        pass

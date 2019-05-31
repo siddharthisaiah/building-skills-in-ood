@@ -1,5 +1,5 @@
 import unittest
-from roulette import Outcome, Bin
+from roulette import Outcome, Bin, Wheel
 
 
 class OutcomeTest(unittest.TestCase):
@@ -40,6 +40,39 @@ class BinTest(unittest.TestCase):
         self.assertEqual(Bin([Outcome("0",35), self.five]), Bin({Outcome("0",35), Outcome("00-0-1-2-3", 6)}))
         self.assertEqual(Bin([Outcome("00",35), self.five]), Bin({Outcome("00",35), Outcome("00-0-1-2-3", 6)}))
     
+
+class WheelBuildTest(unittest.TestCase):
+    
+    def setUp(self):
+        self.five = Outcome("00-0-1-2-3", 6)
+        self.one = Outcome("1", 35)
+        self.street_one_two_three = Outcome("1-2-3", 11)
+        self.corner_one_two_four_five = Outcome("1-2-4-5", 8)
+        self.line_one_to_six = Outcome("1-2-3-4-5-6", 5)
+        self.bin_one = Bin([self.five, self.one, self.street_one_two_three, self.corner_one_two_four_five, self.line_one_to_six])
+        self.bin_four = Bin([self.corner_one_two_four_five, self.line_one_to_six])
+        self.wheel = Wheel()
+
+
+    def test_wheel_has_38_bins(self):
+        self.assertEqual(len(self.wheel.bins), 38)
+
+        
+    def test_outcomes_can_be_added_to_empty_bins_in_wheel(self):
+        self.wheel.addOutcome(1, self.one)
+        self.assertEqual(self.wheel.get(1), Bin({Outcome("1", 35)}))
+
+        
+    def test_outcomes_can_be_added_to_non_empty_bins_in_wheel(self):
+        self.wheel.addOutcome(1, self.street_one_two_three)
+        self.assertEqual(self.wheel.get(1), Bin({Outcome("1", 35), Outcome("1-2-3", 11)}))
+
+    
+
+
+class WheelRandomTest(unittest.TestCase):
+    pass
+
 
 if __name__ == '__main__':
     unittest.main()

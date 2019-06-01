@@ -168,7 +168,28 @@ class BinBuilder:
 
 
     def cornerBets(self, wheel):
-        pass
+        odds = 8
+        prefix = "corner"
+
+        for r in range(0, 11):
+            # column 1-2 corner
+            first_bin = (3 * r) + 1
+            c1_outcome_name = prefix + " " + str(first_bin) + "-" + str(first_bin + 1) + "-" + str(first_bin + 3) + "-" + str(first_bin + 4)
+            corner_one = Outcome(c1_outcome_name, odds)
+            wheel.addOutcome(first_bin, corner_one)
+            wheel.addOutcome(first_bin + 1, corner_one)
+            wheel.addOutcome(first_bin + 3, corner_one)
+            wheel.addOutcome(first_bin + 4, corner_one)
+
+            #column 2-3 corner
+            second_bin = (3 * r) + 2
+            c2_outcome_name = prefix + " " + str(second_bin) + "-" + str(second_bin + 1) + "-" + str(second_bin + 3) + "-" + str(second_bin + 4)
+            corner_two = Outcome(c2_outcome_name, odds)
+            wheel.addOutcome(second_bin, corner_one)
+            wheel.addOutcome(second_bin + 1, corner_one)
+            wheel.addOutcome(second_bin + 3, corner_one)
+            wheel.addOutcome(second_bin + 4, corner_one)
+
 
     def lineBets(self, wheel):
         pass

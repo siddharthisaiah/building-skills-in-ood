@@ -93,6 +93,9 @@ class BinBuilder:
     def buildBins(self, wheel):
         self.straightBets(wheel)
         self.splitBets(wheel)
+        self.streetBets(wheel)
+        self.cornerBets(wheel)
+        self.lineBets(wheel)
         
 
 
@@ -156,7 +159,7 @@ class BinBuilder:
 
     def streetBets(self, wheel):
         odds = 11
-        prefix = street
+        prefix = "street"
 
         for r in range(0, 12):
             bin_number = (3 * r) + 1
@@ -192,7 +195,19 @@ class BinBuilder:
 
 
     def lineBets(self, wheel):
-        pass
+        odds = 5
+        prefix = "line"
+        
+        for r in range(0, 11):
+            outcome_name = prefix + " " + str(3 * r+1) + "-" + str(3 * r + 6)
+            outcome = Outcome(outcome_name, odds)
+            wheel.addOutcome(3 * r + 1, outcome)
+            wheel.addOutcome(3 * r + 2, outcome)
+            wheel.addOutcome(3 * r + 3, outcome)
+            wheel.addOutcome(3 * r + 4, outcome)
+            wheel.addOutcome(3 * r + 5, outcome)
+            wheel.addOutcome(3 * r + 6, outcome)
+
 
     def dozenBets(self, wheel):
         pass

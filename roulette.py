@@ -232,7 +232,32 @@ class BinBuilder:
                 wheel.addOutcome(3 * r + c + 1)
 
 
-                
+    def evenBets(self, wheel):
+        odds = 1
+        red = Outcome("red", odds)
+        black = Outcome("black", odds)
+        even = Outcome("even", odds)
+        odd = Outcome("odd", odds)
+        high = Outcome("high", odds)
+        low = Outcome("low", odds)
+
+        reds = set(1,3,5,7,9, 12, 14, 16, 18, 19, 21 ,23, 25, 27, 30, 32, 34, 36)
+        
+        for b in range(1, 37):
+            if b < 19:
+                wheel.addOutcome(b, low)
+            else:
+                wheel.addOutcome(b, high)
+
+            if b % 2 == 0:
+                wheel.addOutcome(b, even)
+            else:
+                wheel.addOutcome(b, odd)
+
+            if b in reds:
+                wheel.addOutcome(b, red)
+            else:
+                wheel.addOutcome(b, black)
 
     def redBlackBets(self, wheel):
         pass

@@ -50,7 +50,6 @@ class Wheel:
     """
     def __init__(self):
         self.bins = [Bin() for _ in range(38)]
-        # TODO: create a random number generator
         self.rng = Random()
 
 

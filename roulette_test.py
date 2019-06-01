@@ -78,6 +78,7 @@ class WheelRandomTest(unittest.TestCase):
     def setUp(self):
         self.wheel = Wheel()
 
+    # @unittest.skip("Cannot ensure randomness")
     def test_wheel_selects_random_bins(self):
         # seed is set to os.urandom(20)
         self.assertEqual(self.wheel.next(), self.wheel.get(3))

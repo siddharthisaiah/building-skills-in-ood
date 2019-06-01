@@ -210,7 +210,14 @@ class BinBuilder:
 
 
     def dozenBets(self, wheel):
-        pass
+        odds = 2
+        prefix = "dozen"
+
+        for r in range(0, 3):
+            outcome_name = prefix + "-" + str(r + 1)
+            outcome = Outcome(outcome_name, odds)
+            for b in range(0,12):
+                wheel.addOutcome(12 * d + b + 1)
 
     def columnBets(self, wheel):
         pass

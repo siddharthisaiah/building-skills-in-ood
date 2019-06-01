@@ -77,3 +77,116 @@ class Wheel:
         Return type:	Bin
         """
         return self.bins[bin]
+
+
+
+
+class BinBuilder:
+    """
+    BinBuilder creates the Outcomes for all of the 38 individual Bin on a Roulette wheel.
+    """
+
+    def __init__(self):
+        print("building bins....")
+
+
+    def buildBins(self, wheel):
+        self.straightBets(wheel)
+        self.splitBets(wheel)
+        
+
+
+    def straightBets(self, wheel):
+        odds = 35
+        for n in range(0, 37):
+            o = Outcome(str(n), odds)
+            wheel.addOutcome(n, o)
+
+        o = Outcome("00", odds)
+        wheel.addOutcome(37, o)
+
+
+    def splitBets(self, wheel):
+        prefix = "split"
+        odds = 17
+        # create left-right split bets for column 1 and 2
+        for r in range(0, 12): 
+            first_column_number = (3 * r) + 1
+            outcome_name = prefix + " " + str(first_column_number) + "-" + str(first_column_number+1) # split 1-2
+            outcome = Outcome(outcome_name, odds)
+            wheel.addOutcome(first_column_number, outcome)
+            wheel.addOutcome(first_column_number + 1, outcome)
+
+
+        # create left-right split bets for column 2 and 3
+        for r in range(0, 12):
+            first_column_number = (3 * r) + 2
+            outcome_name = prefix + " " + str(first_column_number) + "-" + str(first_column_number+1) # split 2-3
+            outcome = Outcome(outcome_name, odds)
+            wheel.addOutcome(first_column_number, outcome)
+            wheel.addOutcome(first_column_number + 1, outcome)
+
+        # create up-down split bets for column 1
+        for r in range(0, 11):
+            bin_number = (3 * r) + 1
+            outcome_name = prefix + " " + str(bin_number) + "-" + str(bin_number + 3)
+            outcome = Outcome(outcome_name, odds)
+            wheel.addOutcome(bin_number, outcome)
+            wheel.addOutcome(bin_number + 3, outcome)
+
+
+        # create up-down split bets for column 2
+        for r in range(0, 11):
+            bin_number = (3 * r) + 2
+            outcome_name = prefix + " " + str(bin_number) + "-" + str(bin_number + 3)
+            outcome = Outcome(outcome_name, odds)
+            wheel.addOutcome(bin_number, outcome)
+            wheel.addOutcome(bin_number + 3, outcome)
+
+
+        # create up-down split bets for column 3
+        for r in range(0, 11):
+            bin_number = (3 * r) + 3
+            outcome_name = prefix + " " + str(bin_number) + "-" + str(bin_number + 3)
+            outcome = Outcome(outcome_name, odds)
+            wheel.addOutcome(bin_number, outcome)
+            wheel.addOutcome(bin_number + 3, outcome)
+
+            
+
+    def streetBets(self, wheel):
+        odds = 11
+        prefix = street
+
+        for r in range(0, 12):
+            bin_number = (3 * r) + 1
+            outcome_name = prefix + " " + str(bin_number) + "-" + str(bin_number + 1) + "-" + str(bin_number + 2)
+            outcome = Outcome(outcome_name, odds)
+            wheel.addOutcome(bin_number, outcome)
+            wheel.addOutcome(bin_number + 1, outcome)
+            wheel.addOutcome(bin_number + 2, outcome)
+
+
+    def cornerBets(self, wheel):
+        pass
+
+    def lineBets(self, wheel):
+        pass
+
+    def dozenBets(self, wheel):
+        pass
+
+    def columnBets(self, wheel):
+        pass
+
+
+    def redBlackBets(self, wheel):
+        pass
+
+    def oddEvenBets(self, wheel):
+        pass
+
+    def highLowBets(self, wheel):
+        pass
+
+    

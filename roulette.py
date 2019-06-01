@@ -218,7 +218,7 @@ class BinBuilder:
             outcome_name = prefix + "-" + str(r + 1)
             outcome = Outcome(outcome_name, odds)
             for b in range(0,12):
-                wheel.addOutcome(12 * d + b + 1)
+                wheel.addOutcome(12 * r + b + 1, outcome)
 
                 
     def columnBets(self, wheel):
@@ -226,10 +226,10 @@ class BinBuilder:
         prefix = "column"
 
         for c in range(0, 3):
-            outcome_name = prefix + " " + str(c)
+            outcome_name = prefix + " " + str(c + 1)
             outcome = Outcome(outcome_name, odds)
             for r in range(0,12):
-                wheel.addOutcome(3 * r + c + 1)
+                wheel.addOutcome(3 * r + c + 1, outcome)
 
 
     def evenBets(self, wheel):

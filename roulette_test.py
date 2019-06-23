@@ -1,5 +1,5 @@
 import unittest
-from roulette import Outcome, Bin, Wheel
+from roulette import Outcome, Bin, Wheel, BinBuilder
 
 
 class OutcomeTest(unittest.TestCase):
@@ -85,5 +85,19 @@ class WheelRandomTest(unittest.TestCase):
         self.assertEqual(self.wheel.next(), self.wheel.get(13))
         
 
+class BinBuilderTest(unittest.TestCase):
+    # TODO: setup
+    # create wheel and call binbuilder on it
+
+    def setUp(self):
+        self.wheel = Wheel()
+        self.bin_builder = BinBuilder()
+        self.bin_builder.straightBets(self.wheel)
+
+        
+    def test_create_straight_bet_for_special_case_00(self):
+        expected = {Outcome("00", 35) } # frozenset of outcomes
+        self.assertEqual(self.wheel.get(37), expected)
+        
 if __name__ == '__main__':
     unittest.main()

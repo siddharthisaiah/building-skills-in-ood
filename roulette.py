@@ -259,13 +259,4 @@ class BinBuilder:
             else:
                 wheel.addOutcome(b, black)
 
-    def redBlackBets(self, wheel):
-        pass
-
-    def oddEvenBets(self, wheel):
-        pass
-
-    def highLowBets(self, wheel):
-        pass
-
     

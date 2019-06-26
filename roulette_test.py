@@ -79,13 +79,12 @@ class WheelRandomTest(unittest.TestCase):
 
 
 class BinBuilderTest(unittest.TestCase):
-    # TODO: setup
-    # create wheel and call binbuilder on it
-
     def setUp(self):
         self.wheel = Wheel()
         self.bin_builder = BinBuilder()
         self.bin_builder.straightBets(self.wheel)
+        self.bin_builder.splitBets(self.wheel)
+        self.bin_builder.streetBets(self.wheel)
 
     def test_create_straight_bet_for_special_case_00(self):
         expected = {Outcome("00", 35)}  # Bin (frozenset) of outcomes
@@ -112,6 +111,45 @@ class BinBuilderTest(unittest.TestCase):
         bin = self.wheel.get(18)
         self.assertTrue(bin.issuperset(expected))
 
+    def test_create_random_left_right_split_bet_from_column_1_2(self):
+        expected = {Outcome("split 1-2", 17)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(1)
+        self.assertTrue(bin.issuperset(expected))
+
+    def test_create_random_left_right_split_bet_from_column_2_3(self):
+        expected = {Outcome("split 29-30", 17)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(29)
+        self.assertTrue(bin.issuperset(expected))
+
+    def test_create_random_up_down_split_bet_from_column_1(self):
+        expected = {Outcome("split 19-22", 17)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(19)
+        self.assertTrue(bin.issuperset(expected))
+
+    def test_create_random_up_down_split_bet_from_column_2(self):
+        expected = {Outcome("split 8-11", 17)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(11)
+        self.assertTrue(bin.issuperset(expected))
+
+    def test_create_random_up_down_split_bet_from_column_3(self):
+        expected = {Outcome("split 33-36", 17)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(36)
+        self.assertTrue(bin.issuperset(expected))
+
+    def test_create_random_street_bet_1_2_3(self):
+        expected = {Outcome("street 1-2-3", 11)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(2)
+        self.assertTrue(bin.issuperset(expected))
+
+    def test_create_random_street_bet_34_35_36(self):
+        expected = {Outcome("street 34-35-36", 11)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(34)
+        self.assertTrue(bin.issuperset(expected))
+
+    def test_create_random_street_bet_16_17_18(self):
+        expected = {Outcome("street 16-17-18", 11)}  # Bin (frozenset) of outcomes
+        bin = self.wheel.get(18)
+        self.assertTrue(bin.issuperset(expected))
 
 if __name__ == '__main__':
     unittest.main()

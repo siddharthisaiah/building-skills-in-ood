@@ -176,7 +176,7 @@ class BinBuilder:
         prefix = "corner"
 
         for r in range(0, 11):
-            # column 1-2 corner
+            # column 1-2 corner e.g "corner 1-2-4-5"
             first_bin = (3 * r) + 1
             c1_outcome_name = prefix + " " + str(first_bin) + "-" + str(first_bin + 1) + "-" + str(first_bin + 3) + "-" + str(first_bin + 4)
             corner_one = Outcome(c1_outcome_name, odds)
@@ -185,17 +185,18 @@ class BinBuilder:
             wheel.addOutcome(first_bin + 3, corner_one)
             wheel.addOutcome(first_bin + 4, corner_one)
 
-            #column 2-3 corner
+            # column 2-3 corner e.g "corner 23-24-26-27"
             second_bin = (3 * r) + 2
             c2_outcome_name = prefix + " " + str(second_bin) + "-" + str(second_bin + 1) + "-" + str(second_bin + 3) + "-" + str(second_bin + 4)
             corner_two = Outcome(c2_outcome_name, odds)
-            wheel.addOutcome(second_bin, corner_one)
-            wheel.addOutcome(second_bin + 1, corner_one)
-            wheel.addOutcome(second_bin + 3, corner_one)
-            wheel.addOutcome(second_bin + 4, corner_one)
+            wheel.addOutcome(second_bin, corner_two)
+            wheel.addOutcome(second_bin + 1, corner_two)
+            wheel.addOutcome(second_bin + 3, corner_two)
+            wheel.addOutcome(second_bin + 4, corner_two)
 
 
     def lineBets(self, wheel):
+        """ e.g. line 1-6"""
         odds = 5
         prefix = "line"
         
@@ -211,6 +212,7 @@ class BinBuilder:
 
 
     def dozenBets(self, wheel):
+        """ e.g. dozen 2"""
         odds = 2
         prefix = "dozen"
 
@@ -226,7 +228,7 @@ class BinBuilder:
         prefix = "column"
 
         for c in range(0, 3):
-            outcome_name = prefix + " " + str(c + 1)
+            outcome_name = prefix + "-" + str(c + 1)
             outcome = Outcome(outcome_name, odds)
             for r in range(0,12):
                 wheel.addOutcome(3 * r + c + 1, outcome)
@@ -241,7 +243,7 @@ class BinBuilder:
         high = Outcome("high", odds)
         low = Outcome("low", odds)
 
-        reds = set(1,3,5,7,9, 12, 14, 16, 18, 19, 21 ,23, 25, 27, 30, 32, 34, 36)
+        reds = set([1,3,5,7,9, 12, 14, 16, 18, 19, 21 ,23, 25, 27, 30, 32, 34, 36])
         
         for b in range(1, 37):
             if b < 19:
